@@ -5,6 +5,20 @@ Dystem discord bot enforces the rules on the discord server, whilst supply new b
 
 ## Install Guide
 
-The bot has been tested to work on Ubuntu 16.04. You must run the python script under python 3. Python installation:
+The bot has been tested to work on Ubuntu 16.04. You must run the python script under python 3. Python / bot code installation:
 
-```  apt install python3-pip && sudo apt-get install python3-setuptools && pip3 install discord.py && git clone https://github.com/Dystem/dystem-bot.git ``` 
+```  apt install python3-pip && sudo apt-get install python3-setuptools && pip3 install discord.py && apt install python3 && apt install python-minimal
+ && alias python='python3' && git clone https://github.com/Dystem/dystem-bot.git ``` 
+
+Now you must add your discord bot secret key:
+
+```  cd dystem-bot ```
+
+``` touch secrets.py ```
+
+``` vi secrets.py ```
+
+Then add the line replacing the section with the secret bot key geenrated on your discord developer account: 
+
+``` TOKEN = "<YOUR SECRET TOKEN>" ``` 
+
