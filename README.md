@@ -33,6 +33,7 @@ TOKEN = "<YOUR SECRET TOKEN>"
 ``` 
 
 ## Launch daemon
+
 ``` 
 sudo nano /lib/systemd/system/myscript.service
 ``` 
@@ -50,4 +51,30 @@ ExecStart=/usr/bin/python3 /root/dystem-bot/main.py
 
 [Install]
 WantedBy=multi-user.target
+``` 
+
+Then set peemissions on the script
+
+``` 
+sudo chmod 644 /lib/systemd/system/myscript.service
+``` 
+
+Launch the daemon 
+
+``` 
+sudo systemctl daemon-reload
+sudo systemctl enable myscript.service
+``` 
+
+Then reboot 
+
+``` 
+reboot
+``` 
+
+
+Then on restart check the service is up and running
+
+``` 
+sudo systemctl status myscript.service
 ``` 
