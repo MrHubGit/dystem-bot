@@ -32,3 +32,22 @@ Then add the line replacing the section with the secret bot key geenrated on you
 TOKEN = "<YOUR SECRET TOKEN>" 
 ``` 
 
+## Launch daemon
+``` 
+sudo nano /lib/systemd/system/myscript.service
+``` 
+
+Then add the following content to the systemd script 
+
+``` 
+[Unit]
+Description=My Script Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /root/dystem-bot/main.py
+
+[Install]
+WantedBy=multi-user.target
+``` 
