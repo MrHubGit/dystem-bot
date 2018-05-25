@@ -1,11 +1,14 @@
 import discord 
-import secrets 
+import secrets
+import config 
 from discord.ext.commands import Bot 
 from discord.ext import commands 
 from discord.voice_client import VoiceClient
 import asyncio 
 import time 
 from random import randint
+import json
+import requests
 
 Client = discord.Client() 
 command_bot = commands.Bot(command_prefix="!", description="Hi! I am the dystem bot. Beep.")
@@ -13,13 +16,6 @@ command_bot = commands.Bot(command_prefix="!", description="Hi! I am the dystem 
 @command_bot.event 
 async def on_ready(): 
     print("Hello dystem!")
-
-@command_bot.command(pass_context=True)
-async def test(ctx):
-    embed = discord.Embed(title="nice bot", description="Nicest bot there is ever.", color=0xeee657)
-    embed.add_field(name="Author", value="Dystem")
-    embed.add_field(name="Invite", value="[Invite link](<insert your OAuth invitation link here>)")
-    await ctx.send(embed=embed)
 
 #ban any users who have not applied to the rules
 @command_bot.event
@@ -54,10 +50,50 @@ async def on_message(message):
         await command_bot.send_message(message.channel, "{}".format(output))
     
     if message.content.startswith("!about"):
-        output = "<:dystem:445979324210741250> Dystem - Empowering open source development.\n```"
-        output = output + "Price: TBC \n"
-        output = output + "Block height: TBC \n"
-        output = output + "```"
+        headers = {'content-type': 'application/json'}
+        getmasternodecount = json.dumps({"method": 'getmasternodecount', "params": [], "jsonrpc": "2.0"})
+        getinfo = json.dumps({"method": 'getinfo', "params": [], "jsonrpc": "2.0"})
+        r_getinfo = requests.post('http://127.0.0.1:17100/', auth=(secrets.RPC_USR, secrets.RPC_PWD), headers=headers, data=getinfo)
+        r_getmn = requests.post('http://127.0.0.1:17100/', auth=(secrets.RPC_USR, secrets.RPC_PWD), headers=headers, data=getmasternodecount)
+        r_getprice = requests.get('https://graviex.net:443//api/v2/tickers/dtembtc.json')
+        parsed_info = r_getinfo.json()['result']
+        parsed_mn = r_getmn.json()['result']
+        parsed_price = r_getprice.json()['ticker']
+
+        #start compiled list of configiured out put
+        output = ""
+        if config.emoji_logo != "":
+            output = output + config.emoji_logo + " "
+
+        #Add coin name + tag line
+        if config.coin_name != "":
+            output = output + config.coin_name
+
+        if config.coin_tag != "":
+            output = output + " - " + config.coin_tag
+
+        output = output + " ```diff\n"
+
+        #Show 24 hour percentage
+        if config.exchange ==  "graviex":
+            percent = float(parsed_price['change']) * 100
+            if percent > 0:
+                output = output + "+ 24hr hour change: {0:.2f}%\n".format(percent)
+            else:
+                output = output + "- 24hr hour change: {0:.2f}%\n".format(percent)
+
+            #Show exchange price listing
+            output = output + "# Price:{0:.8f} BTC\n".format(float(parsed_price['last']))
+            output = output + "# 24hr volume: {0:.2f} BTC\n".format(float(parsed_price['volbtc']))
+
+        #Block information and details 
+        if config.running_node == "yes":
+            output = output + "# Block height: " + str(parsed_info["blocks"])  + "\n"
+            output = output + "# Total supply: " + str(parsed_info["moneysupply"])  + "\n"
+            output = output + "# Active masternodes: " + str(parsed_mn["stable"]) + " \n"
+            output = output + "# Current difficulty: " + str(parsed_info["difficulty"]) + " \n"
+            output = output + "``` Dystem bot version: " + config.version
+
         await command_bot.send_message(message.channel, "{}".format(output))
 
     if message.content.startswith("!invitelist"):
