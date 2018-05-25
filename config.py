@@ -14,4 +14,4 @@ exchange = "graviex"
 running_node = "yes"
 
 #The current bot version
-version = "v.1.0.2"
+version = "v.1.0.3"

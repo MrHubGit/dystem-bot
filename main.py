@@ -41,11 +41,14 @@ async def on_message(message):
         await command_bot.send_message(message.channel, "{}".format(cat_switcher.get(randomCat, "https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif")) )
 
     if message.content.startswith("!help"):
-        output = "Public blockchainot commands:\n```css\n"
+        output = "Public blockchainot commands:\n```md\n"
+        output = output + "!help : lists all of the dystem bot commands and their usage. \n"
         output = output + "!about : displays current blockchain and prices stats. \n"
+        output = output + "!commissions : displays active commissions, in the designated commission channel. \n"
+        output = output + "!apply <commision id> : applies for a commission \n"
         output = output + "!invitelist : lists the top 20 inviters for the server. \n"
         output = output + "!cat : displays a random cat meme for danystem. \n"
-        output = output + "!help : lists all of the dystem bot commands and their usage. \n"
+        
         output = output + "```"
         await command_bot.send_message(message.channel, "{}".format(output))
     
@@ -95,6 +98,7 @@ async def on_message(message):
             output = output + "``` Dystem bot version: " + config.version
 
         await command_bot.send_message(message.channel, "{}".format(output))
+        await command_bot.delete_message(message)
 
     if message.content.startswith("!invitelist"):
         server = message.channel.server
@@ -132,5 +136,51 @@ async def on_message(message):
         output = output + "```"
         await command_bot.send_message(message.channel, "{}".format(output))
         
+    if message.content.startswith("!commissions"):
+        print("{}".format(message.channel.id))
+        if message.channel.id == secrets.commission_channel_id:
+            async for msg in command_bot.logs_from(message.channel):
+                await command_bot.delete_message(msg)
+             
+            with open('commisions.json') as json_data:
+                json_d = json.load(json_data)
+                commission_json = json_d["commissions"]
+                for commission in commission_json:
+                    if commission["active"] and not commission["completed"]:
+                        output = " ```md\n"
+                        output = output + "** " + commission["title"] + " **" + " \n\n"
+                        output = output + commission["body"] + " \n\n"
+                        output = output + "You earn: " + commission["fee"]  + " " + commission["coin"] + " \n"
+                        output = output + "Contract with: " + commission["author"] + " \n"
+                        output = output + "Listed date: " + commission["created_at"] + " \n\n"
+                        output = output + "To apply for this job use the command: !apply " + commission["link_id"] + "\n"
+                        output = output + "```"
+                        await command_bot.send_message(discord.Object(id=secrets.commission_channel_id), output)
+    
+    if message.content.startswith("!apply"):
+        if message.channel.id == secrets.commission_channel_id:
+            args = message.content.split()
+            if len(args) == 2:
+                with open('commisions.json') as json_data:
+                    json_d = json.load(json_data)
+                    commission_json = json_d["commissions"]
+                    found = 0
+                    for commission in commission_json:
+                        if commission["active"] and not commission["completed"] and commission["link_id"] == args[1]:
+                            found = 1
+                            break
+                        
+                    if found == 1:
+                        application_message = "has applied for the job {}".format(args[1])
+                        application_message = "<@{}> " + application_message
+                        await command_bot.send_message(discord.Object(id=secrets.commission_application_channel_id), application_message.format(message.author.id))
+                        await command_bot.send_message(message.author, "You have succesfully applied to the commission with the id {}. The author will be in touch shortly.".format(args[1]))
+                    else:
+                        await command_bot.send_message(message.author, "There was an error with your application. An active commission with that id could not be found.")
+            else:
+                await command_bot.send_message(message.author, "There was an error with your application. You didnt add the commission id to the application.")
+                #else
+                    #await command_bot.send_message(discord.Object(id=secrets.commission_channel_id), output)
+            await command_bot.delete_message(message)
 command_bot.run(secrets.TOKEN)
 
