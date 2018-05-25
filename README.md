@@ -5,7 +5,11 @@ Dystem discord bot enforces the rules on the discord server, whilst supply new b
 
 ## Install Guide
 
-The bot has been tested to work on Ubuntu 16.04. You must run the python script under python 3. Python / bot code installation:
+The bot has been tested to work on Ubuntu 16.04. You must run the python script under python 3. 
+
+You must be running a Dysten node on the server in order to get price information using the ```!about``` command.
+
+Python / bot code installation:
 
 ```  
 apt install python3-pip && sudo apt-get install python3-setuptools && pip3 install discord.py && apt install python3 && apt install python-minimal
@@ -78,3 +82,6 @@ Then on restart check the service is up and running
 ``` 
 sudo systemctl status myscript.service
 ``` 
+
+## Configuration and customisation
+There is now a configuration file ```config.py``` that contains all the customisaion settings. To use the bot for your own purposes change the configuration to match your coin.
