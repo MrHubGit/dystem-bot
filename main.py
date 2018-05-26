@@ -137,11 +137,14 @@ async def on_message(message):
         await command_bot.send_message(message.channel, "{}".format(output))
         
     if message.content.startswith("!commissions"):
-        print("{}".format(message.channel.id))
         if message.channel.id == secrets.commission_channel_id:
-            async for msg in command_bot.logs_from(message.channel):
-                await command_bot.delete_message(msg)
-             
+            mgs = []
+            async for x in command_bot.logs_from(message.channel, limit = 200):
+                mgs.append(x)
+
+            if len(mgs) > 0:
+                await command_bot.delete_messages(mgs)
+
             with open('commisions.json') as json_data:
                 json_d = json.load(json_data)
                 commission_json = json_d["commissions"]
