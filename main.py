@@ -140,15 +140,17 @@ async def on_message(message):
     if message.content.startswith("!commissions"):
         if "@admin" in [y.name.lower() for y in message.author.roles]:
             if message.channel.id == secrets.commission_channel_id:
-                async for msg in command_bot.logs_from(message.channel):
-                    await command_bot.delete_message(msg)
+                async for x in command_bot.logs_from(message.channel, limit = 200):
+                    mgs.append(x)
+
+                if len(mgs) > 0:
+                    await command_bot.delete_messages(mgs)
              
                 with open('commisions.json') as json_data:
                     json_d = json.load(json_data)
                     commission_json = json_d["commissions"]
                     for commission in commission_json:
                         if not commission["status"] == "completed":
-                            #and not commission["status"] == "awarded"
                             output = " ```md\n"
                             output = output + "** NEW COMMISSION - " + commission["title"] + " **" + " ```"
                             output = output + "```diff\n"
@@ -161,8 +163,7 @@ async def on_message(message):
                             else:
                                 output = output + "! To apply for this job use the command: !apply " + commission["link_id"] + "\n"
                             output = output + "```"
-                            await command_bot.send_message(message.channel, output)
-                            #await command_bot.send_message(discord.Object(id=secrets.commission_channel_id), output)
+                            await command_bot.send_message(discord.Object(id=secrets.commission_channel_id), output)
     
     if message.content.startswith("!apply"):
         if message.channel.id == secrets.commission_channel_id:

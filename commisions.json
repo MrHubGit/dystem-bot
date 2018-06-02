@@ -9,9 +9,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "awarded",
             "awarded_by": "discord",
             "awarded_to": "discord",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "3ba8ee2a"
         },
         {
@@ -24,9 +30,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "5eb5d7f9"
         },
         {
@@ -39,9 +51,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "308b5541"
         },
         {
@@ -54,9 +72,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "d64137cd"
         },
         {
@@ -69,9 +93,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "a7f870fd"
         },
         {
@@ -84,9 +114,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "ed5fd0a8"
         },
         {
@@ -99,9 +135,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "ed5fd0a8"
         },
         {
@@ -114,9 +156,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "ed5fd0a8"
         },
         {
@@ -129,9 +177,15 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
+=======
+            "completed": false,
+            "awarded": false,
+            "active": true,
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
             "link_id": "ed5fd0a8"
         },
         {
@@ -144,6 +198,7 @@
             "created_at": "2018-05-25 19:22:06",
             "updated_at": "2018-05-25 19:22:06",
             "deleted_at": "",
+<<<<<<< HEAD
             "status": "active",
             "awarded_by": "",
             "awarded_to": "",
@@ -151,3 +206,12 @@
         }
     ]
 }
+=======
+            "completed": true,
+            "awarded": true,
+            "active": false,
+            "link_id": "ed5fd0a8"
+        }
+    ]
+}
+>>>>>>> b10c12892ed74049164a0ffa4897e94c9e5dbe19
