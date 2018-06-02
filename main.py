@@ -139,6 +139,7 @@ async def on_message(message):
         
     if message.content.startswith("!commissions"):
         if "@admin" in [y.name.lower() for y in message.author.roles]:
+            mgs = []
             if message.channel.id == secrets.commission_channel_id:
                 async for x in command_bot.logs_from(message.channel, limit = 200):
                     mgs.append(x)
