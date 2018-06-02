@@ -144,7 +144,7 @@ async def on_message(message):
                 async for x in command_bot.logs_from(message.channel, limit = 200):
                     mgs.append(x)
 
-                if len(mgs) > 0:
+                if len(mgs) > 1:
                     await command_bot.delete_messages(mgs)
              
                 with open('commisions.json') as json_data:
